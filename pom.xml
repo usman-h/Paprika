@@ -26,6 +26,7 @@
     <artifactId>Paprika</artifactId>
     <packaging>jar</packaging>
     <version>1.0.0</version>
+    <name>com.usmanhussain.paprika:Paprika</name>
     <description>com.usmanhussain.paprika - Paprika allows users to download a sample project with some dummy tests.
         This is a playground to try out new changes for Habanero.
         Habanero is the Test Automation Framework which allows tests to be written within a DevOps, Agile or Waterfall
