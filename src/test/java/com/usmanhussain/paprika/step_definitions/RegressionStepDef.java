@@ -1,6 +1,6 @@
-package com.usmanhussain.sample.step_definitions;
+package com.usmanhussain.paprika.step_definitions;
 
-import com.usmanhussain.sample.BaseStepDef;
+import com.usmanhussain.paprika.BaseStepDef;
 import cucumber.api.java.en.Given;
 
 public class RegressionStepDef extends BaseStepDef {
