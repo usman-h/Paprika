@@ -10,6 +10,7 @@ public class SmokeTest extends BaseStepDef {
 
     @Given("^I have navigated to a website$")
     public void iHaveNavigatedToAWebsite() throws Throwable {
+
         //getDriver().get("http://www.bing.com");
     }
 
