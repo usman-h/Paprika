@@ -23,7 +23,7 @@ public class FirstSeleniumTest {
         System.setProperty("webdriver.chrome.driver", "D:\\Automation\\Paprika\\src\\main\\resources\\drivers\\chromedriver.exe");
         driver = new ChromeDriver();
 /*
-        System.setProperty("webdriver.gecko.driver", "D:\Automation\Paprika\src\main\resources\drivers\\geckodriver.exe");
+        System.setProperty("webdriver.gecko.driver", "C:\\Development_Avecto\\geckodriver.exe");
         driver = new FirefoxDriver();
 */
 /*
@@ -31,10 +31,10 @@ public class FirstSeleniumTest {
         driver = new InternetExplorerDriver();
 */
 /*
-        System.setProperty("phantomjs.binary.path", "D:\Automation\Paprika\src\main\resources\drivers\\phantomjs.exe");
+        System.setProperty("phantomjs.binary.path", "D:\\Automation\\Paprika\\src\\main\\resources\\drivers\\phantomjs.exe");
         driver = new PhantomJSDriver();
-*/
         driver.get("https://www.directline.com/");
+*/
 
         try {
             driver.findElement(By.id("car-insurance/getquote"));
@@ -44,6 +44,7 @@ public class FirstSeleniumTest {
             driver.findElement(By.name("loginButton"));
             System.out.println("Element found by name");
 
+/*
             driver.get("https://www.directline.com/");
             driver.findElement(By.className("navigation-primary"));
             System.out.println("Element found by classname");
@@ -57,8 +58,9 @@ public class FirstSeleniumTest {
             lElement = driver.findElements(By.tagName("a"));
             System.out.println("Element found by tagname ==== " + lElement.size());
 
+            Assert.assertFalse(driver.findElements(By.cssSelector("[data-test-id*='-address-']")).size() >0);
+
             //css selector sample
-/*
             //on https://www.directline.com/
             driver.findElement(By.cssSelector("#cookie-bar"));
             System.out.println("Element found by cssselector #");
@@ -100,20 +102,18 @@ public class FirstSeleniumTest {
 
             driver.findElement(By.cssSelector("div input[id^='exp-']:nth-of-type(2)"));
             System.out.println("Element found by cssselector nth-of-type");
-*/
-
             //xpath sample strings
 
             // on https://www.directline.com/quote/home/details
 
-            //label[contains(text(),'Mortgaged')]
-            //span[./input[@name='rentOwn']]/parent::div
-            //span[./input[@name='rentOwn']]/following-sibling::span[3]
-            //span[./input[@name='rentOwn']]/parent::div/parent::div/preceding-sibling::strong
-            //span[./input[@name='rentOwn']]/parent::div/descendant::label[contains(text(),'Council Rented')]
-            //span[./input[@name='rentOwn']][3]/parent::div/descendant::label[contains(text(),'Council Rented')]
-            //span[./label[contains(text(),'Mortgaged')]]/parent::div/parent::div/preceding-sibling::strong
-
+            String xPathString = "//label[contains(text(),'Mortgaged')]";
+            xPathString = "//span[./input[@name='rentOwn']]/parent::div";
+            xPathString = "//span[./input[@name='rentOwn']]/following-sibling::span[3]";
+            xPathString = "//span[./input[@name='rentOwn']]/parent::div/parent::div/preceding-sibling::strong";
+            xPathString = "//span[./input[@name='rentOwn']]/parent::div/descendant::label[contains(text(),'Council Rented')]";
+            xPathString = "//span[./input[@name='rentOwn']][3]/parent::div/descendant::label[contains(text(),'Council Rented')]";
+            xPathString = "//span[./label[contains(text(),'Mortgaged')]]/parent::div/parent::div/preceding-sibling::strong";
+*/
         }
         catch (Exception ex){
             Assert.fail(ex.toString());
