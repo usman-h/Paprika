@@ -33,8 +33,8 @@ public class FirstSeleniumTest {
 /*
         System.setProperty("phantomjs.binary.path", "D:\\Automation\\Paprika\\src\\main\\resources\\drivers\\phantomjs.exe");
         driver = new PhantomJSDriver();
-        driver.get("https://www.directline.com/");
 */
+        driver.get("https://www.directline.com/");
 
         try {
             driver.findElement(By.id("car-insurance/getquote"));
