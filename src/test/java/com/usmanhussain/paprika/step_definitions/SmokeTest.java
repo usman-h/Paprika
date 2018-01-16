@@ -10,12 +10,13 @@ public class SmokeTest extends BaseStepDef {
 
     @Given("^I have navigated to a website$")
     public void iHaveNavigatedToAWebsite() throws Throwable {
+
         getDriver().get("http://www.bing.com");
     }
 
     @When("^I search for the following '(.+)'$")
     public void iSearchForTheFollowing(String searchTerm) throws Throwable {
-        getDriver().findElement(By.id("sb_form_q")).sendKeys(searchTerm);
+        getDriver().findElement(By.id("sb_form_q1111")).sendKeys(searchTerm);
         getDriver().findElement(By.id("sb_form_go")).click();
     }
 
