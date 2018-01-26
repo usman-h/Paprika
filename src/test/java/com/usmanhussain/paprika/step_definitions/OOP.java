@@ -71,9 +71,12 @@ public class OOP extends BaseStepDef {
 
     //**************************************************************************************************
 
-//    @Then("^I can verify all the fields are present$")
-//    public void iCanVerifyAllTheFieldsArePresent() throws Throwable {
-//        //What can i reuse to go here...
-//    }
+    @Then("^I can verify all the fields are present$")
+    public void iCanVerifyAllTheFieldsArePresent() throws Throwable {
+        myDetailsSection.carRegistrationTextField().isDisplayed();
+        myDetailsSection.findRegistrationButton().isDisplayed();
+        myDetailsSection.annualMileageDropdown().isDisplayed();
+        myDetailsSection.carNotYetPurchasedRadioBtn().isDisplayed();
+    }
 
 }
