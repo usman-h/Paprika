@@ -23,7 +23,7 @@ public class FirstSeleniumTest {
         System.setProperty("webdriver.chrome.driver", "D:\\Automation\\Paprika\\src\\main\\resources\\drivers\\chromedriver.exe");
         driver = new ChromeDriver();
 /*
-        System.setProperty("webdriver.gecko.driver", "C:\\Development_Avecto\\geckodriver.exe");
+        System.setProperty("webdriver.gecko.driver", "D:\\Automation\\Paprika\\src\\main\\resources\\drivers\\geckodriver.exe");
         driver = new FirefoxDriver();
 */
 /*
