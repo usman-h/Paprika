@@ -1,0 +1,50 @@
+node('JENKINS_NODE_NAME') {
+
+	docker.image("DOCKER_IMAGE_NAME").inside("--privileged -v /var/run/docker.sock:/var/run/docker.sock") {
+
+        try {
+
+            stage('Checkout latest from GIT') {
+                git url: "REPO_URL_TO_CLONE", credentialsId:"JENKINS_CREDIENTIALS_THAT_COMMUNICATE_WITH_YOUR_GIT_REPO"
+            }
+
+            stage('Clean test workspace') {
+                sh 'mvn clean'
+            }
+
+            stage('Build project test code') {
+                sh 'mvn install -DskipTests'
+            }
+
+            stage('Execute tests') {
+                sh 'xvfb-run --server-args="-screen 0, 1920x1080x24" mvn clean test -P'+ENV+' -DdriverType=chrome -Dwebdriver.chrome.driver="$CHROMEDRIVER_DIR/chromedriver" -Dsurefire.fork.count=5'
+            }
+
+            stage('Test reports') {
+                step([$class: 'ArtifactArchiver', artifacts: '**/target/cucumber_reports/regression_results/*.json', fingerprint: true])
+                sh 'mvn exec:java -Dexec.mainClass="PACKAGE_GOES_HERE.JSONReportMerger" -Dexec.args="target/cucumber_reports/regression_results" -Dexec.classpathScope=test'
+                step([$class: 'CucumberReportPublisher', fileIncludePattern: '**/cucumber.json', ignoreFailedTests: false, jenkinsBasePath: '', jsonReportDirectory: 'target', parallelTesting: false, pendingFails: false, skippedFails: false, undefinedFails: false])
+                echo 'Test Reports should be produced'
+		    }
+
+			stage('Emailing test results') {
+                step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: 'email@address.one email@address.two', sendToIndividuals: false])
+            }
+
+        } catch (e){
+
+            stage('Test reports') {
+                step([$class: 'ArtifactArchiver', artifacts: '**/target/cucumber_reports/regression_results/*.json', fingerprint: true])
+                sh 'mvn exec:java -Dexec.mainClass="PACKAGE_GOES_HERE.JSONReportMerger" -Dexec.args="target/cucumber_reports/regression_results" -Dexec.classpathScope=test'
+                step([$class: 'CucumberReportPublisher', fileIncludePattern: '**/cucumber.json', ignoreFailedTests: false, jenkinsBasePath: '', jsonReportDirectory: 'target', parallelTesting: false, pendingFails: false, skippedFails: false, undefinedFails: false])
+                echo 'Test Reports should be produced'
+			}
+
+			stage('Emailing test results') {
+                step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: 'email@address.one email@address.two', sendToIndividuals: false])
+            }
+
+            throw e
+        }
+    }
+}

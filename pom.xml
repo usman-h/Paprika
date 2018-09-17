@@ -1,30 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <!--
-    =================================================================================
-        Copyright (C) 2017 Usman H Hussain
-
-        Licensed under the Apache License, Version 2.0 (the "License");
-        you may not use this file except in compliance with the License.
-        You may obtain a copy of the License at:
-
-        http://www.apache.org/licenses/LICENSE-2.0
-
-        Unless required by applicable law or agreed to in writing, software
-        distributed under the License is distributed on an "AS IS" BASIS,
-        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-        See the License for the specific language governing permissions and
-        limitations under the License.
-    =================================================================================
-    -->
 
     <groupId>com.usmanhussain.paprika</groupId>
     <artifactId>Paprika</artifactId>
-    <packaging>jar</packaging>
     <version>1.0.0</version>
     <name>com.usmanhussain.paprika:Paprika</name>
     <description>com.usmanhussain.paprika - Paprika allows users to download a sample project with some dummy tests.
@@ -35,83 +14,60 @@
     </description>
     <url>https://github.com/usman-h/Paprika</url>
 
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-            <comments>
-                Copyright (c) 2017 Usman H Hussain, All rights reserved.
-            </comments>
-        </license>
-    </licenses>
-
     <developers>
         <developer>
             <name>Usman H Hussain</name>
             <email>usman-h@hotmail.co.uk</email>
+            <url>https://github.com/usman-h</url>
         </developer>
     </developers>
-
-    <scm>
-        <connection>scm:git:git://github.com/usman-h/Paprika.git</connection>
-        <developerConnection>scm:git:git@github.com:usman-h/Paprika.git</developerConnection>
-        <url>git://github.com/usman-h/Paprika</url>
-        <tag>HEAD</tag>
-    </scm>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-
-        <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/</url>
-        </repository>
-    </distributionManagement>
 
     <properties>
         <sonar.language>java</sonar.language>
         <custom.folder>config</custom.folder>
         <surefire.fork.count>2</surefire.fork.count>
         <features>src/test/resources/features</features>
-        <testFailureIgnore>false</testFailureIgnore>
+        <testFailureIgnore>true</testFailureIgnore>
         <driverType>$driver</driverType>
-        <generateHarReport>false</generateHarReport>
+        <generateHarReport>true</generateHarReport>
         <jenkinsStyleReports>true</jenkinsStyleReports>
         <chromeDriverPath>${basedir}\src\main\resources\drivers\chromedriver.exe</chromeDriverPath>
         <ieDriverPath>${basedir}\src\main\resources\drivers\IEDriverServer.exe</ieDriverPath>
         <geckoDriverPath>${basedir}\src\main\resources\drivers\geckodriver.exe</geckoDriverPath>
-        <phantomjsDriverPath>${basedir}/src/main/resources/drivers/phantomjs</phantomjsDriverPath>
+        <!--<phantomjsDriverPath>${basedir}\src\main\resources\drivers\phantomjs.exe</phantomjsDriverPath>-->
         <java.version>1.8</java.version>
         <hamcrest.version>1.3</hamcrest.version>
         <maven.compiler.version>3.3</maven.compiler.version>
-        <maven.surefire.plugin.version>2.19.1</maven.surefire.plugin.version>
+        <maven.surefire.plugin.version>2.22.0</maven.surefire.plugin.version>
         <logback.version>1.1.7</logback.version>
-        <wiremock.version>2.7.0</wiremock.version>
         <cucumber.jvm.parallel.version>1.2.1</cucumber.jvm.parallel.version>
         <maven.checkstyle.plugin.version>2.17</maven.checkstyle.plugin.version>
         <checkstyle.version>6.19</checkstyle.version>
-        <acceptance.tests.in.parallel>2</acceptance.tests.in.parallel>
+        <acceptance.tests.in.parallel>1</acceptance.tests.in.parallel>
         <logLevel>WARN</logLevel>
-        <!--<cucumber.opts>&#45;&#45;tags ~@wip</cucumber.opts>
-        <cucumber.parallel.opts>"~@wip"</cucumber.parallel.opts>-->
+        <include>**/*Test.class</include>
+        <runTags>default</runTags>
+        <noRunTags>~@manual</noRunTags>
     </properties>
 
     <profiles>
         <profile>
             <id>jenkins</id>
         </profile>
+
+        <profile>
+            <id>ENVIRONMENT ID GOES HERE!!!</id>
+            <!-- Use these profiles to run tests against different environments -->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
         <profile>
             <id>reporting</id>
             <properties>
                 <jenkinsStyleReports>true</jenkinsStyleReports>
             </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
         </profile>
     </profiles>
 
@@ -127,84 +83,6 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
-
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.7</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
-                <configuration>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <useReleaseProfile>false</useReleaseProfile>
-                    <releaseProfiles>release</releaseProfiles>
-                    <goals>deploy</goals>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>2.2.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.9.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.sonarsource.scanner.maven</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.3.0.603</version>
-            </plugin>
-
-            <!--################################################-->
-            <!--TO ONLY BE USED BY USMAN H HUSSAIN FOR DEPLOYING-->
-            <!--################################################-->
-            <!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.5</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            -->
 
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -244,18 +122,16 @@
                             <!-- Mandatory -->
                             <!-- comma separated list of package names to scan for glue code -->
                             <glue>
-                                <package>com.usmanhussain.paprika.step_definitions</package>
-                                <package>com.usmanhussain.paprika.hooks</package>
+                                <package>${project.groupId}.step_definitions</package>
+                                <package>${project.groupId}.hooks</package>
                             </glue>
                             <!-- These are the default values -->
                             <!-- Where to output the generated Junit tests -->
-                            <outputDirectory>${project.build.directory}/generated-test-sources/features
-                            </outputDirectory>
+                            <outputDirectory>${project.build.directory}/generated-test-sources/features</outputDirectory>
                             <!-- The diectory containing your feature files.  -->
                             <featuresDirectory>${features}</featuresDirectory>
                             <!-- Directory where the cucumber report files shall be written  -->
-                            <cucumberOutputDir>${project.build.directory}/cucumber_reports/regression_results
-                            </cucumberOutputDir>
+                            <cucumberOutputDir>${project.build.directory}/cucumber_reports/regression_results</cucumberOutputDir>
                             <!-- comma separated list of output formats -->
                             <plugins>
                                 <plugin>
@@ -267,7 +143,11 @@
                                 <plugin>
                                     <name>junit</name>
                                 </plugin>
+                                <plugin>
+                                    <name>rerun</name>
+                                </plugin>
                             </plugins>
+
                             <!-- CucumberOptions.strict property -->
                             <strict>true</strict>
                             <!-- CucumberOptions.monochrome property -->
@@ -276,11 +156,13 @@
                             <namingScheme>pattern</namingScheme>
                             <!-- The class naming pattern to use.  Only required/used if naming scheme is 'pattern'.-->
                             <namingPattern>{f}_Parallel{c}Test</namingPattern>
+                            <!-- One of [SCENARIO, FEATURE]. SCENARIO generates one runner per scenario.  FEATURE generates a runner per feature. -->
+                            <parallelScheme>FEATURE</parallelScheme>
                             <!-- If set to true, only feature files containing the required tags shall be generated. -->
                             <!-- Excluded tags (~@notMe) are ignored. -->
                             <tags>
-                                <tag>~@manual</tag>
-                                <tag>~@wip</tag>
+                                <tag>${runTags}</tag>
+                                <tag>${noRunTags}</tag>
                             </tags>
                         </configuration>
                     </execution>
@@ -300,10 +182,45 @@
                         </goals>
                         <configuration>
                             <classpathScope>test</classpathScope>
-                            <mainClass>com.usmanhussain.paprika.JSONReportMerger</mainClass>
+                            <mainClass>${project.groupId}.JSONReportMerger</mainClass>
                             <arguments>
                                 <argument>target/cucumber_reports/regression_results</argument>
                             </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <executions>
+                    <execution>
+                        <id>merge-cucumber-js-reports</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <includeProjectDependencies>true</includeProjectDependencies>
+                            <classpathScope>test</classpathScope>
+                            <mainClass>com.usmanhussain.ghost.JSONReportMerger</mainClass>
+                            <arguments>
+                                <argument>target/cucumber_reports/regression_results</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>collate-exceptions</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <includeProjectDependencies>true</includeProjectDependencies>
+                            <classpathScope>test</classpathScope>
+                            <mainClass>com.usmanhussain.ghost.AutoSmart</mainClass>
                         </configuration>
                     </execution>
                 </executions>
@@ -322,9 +239,7 @@
                         <configuration>
                             <projectName>cucumber-jvm</projectName>
                             <outputDirectory>${project.build.directory}</outputDirectory>
-                            <cucumberOutput>
-                                ${project.build.directory}/cucumber_reports/regression_results/cucumber.json
-                            </cucumberOutput>
+                            <cucumberOutput>${project.build.directory}/cucumber_reports/regression_results/cucumber.json</cucumberOutput>
                         </configuration>
                     </execution>
                 </executions>
@@ -343,10 +258,8 @@
                     <argLine>-Dfile.encoding=UTF-8</argLine>
                     <useFile>false</useFile>
                     <testFailureIgnore>${testFailureIgnore}</testFailureIgnore>
-                    <!--<printSummary>true</printSummary>-->
                     <includes>
-                        <!--<include>**/*IT.class</include>-->
-                        <include>**/*Test.class</include>
+                        <include>${include}</include>
                     </includes>
                     <systemPropertyVariables>
                         <driverType>${driverType}</driverType>
@@ -354,8 +267,8 @@
                         <webdriver.chrome.driver>${chromeDriverPath}</webdriver.chrome.driver>
                         <webdriver.ie.driver>${ieDriverPath}</webdriver.ie.driver>
                         <webdriver.gecko.driver>${geckoDriverPath}</webdriver.gecko.driver>
-                        <webdriver.phantomjs.driver>${phantomjsDriverPath}</webdriver.phantomjs.driver>
-                        <phantomjs.binary.path>${phantomjsDriverPath}</phantomjs.binary.path>
+                        <!--<webdriver.phantomjs.driver>${phantomjsDriverPath}</webdriver.phantomjs.driver>
+                        <phantomjs.binary.path>${phantomjsDriverPath}</phantomjs.binary.path>-->
                         <jenkinsStyleReports>${jenkinsStyleReports}</jenkinsStyleReports>
                         <logLevel>debug</logLevel>
                     </systemPropertyVariables>
@@ -365,13 +278,10 @@
     </build>
 
     <dependencies>
-
         <dependency>
             <groupId>com.usmanhussain.habanero</groupId>
             <artifactId>Habanero</artifactId>
-            <version>1.0.7</version>
+            <version>1.3.0</version>
         </dependency>
-
     </dependencies>
-
 </project>

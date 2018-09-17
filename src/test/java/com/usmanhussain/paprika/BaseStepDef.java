@@ -13,12 +13,4 @@ public class BaseStepDef extends WebDriverDiscovery {
         return remoteWebDriver;
     }
 
-    public void acceptAlert() {
-        try {
-            getDriver().switchTo().alert().accept();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 }
