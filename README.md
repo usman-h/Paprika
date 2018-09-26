@@ -18,7 +18,7 @@ You are more than free to clone the repository to try out and use on your own. P
 * Once you have the project locally, open command prompt (cmd)
 * Run: **mvn clean compile** (if required) 
 * Then run: **mvn clean install -DskipTests**
-* After that is successful, to execute the demo test run **mvn test -DrunTags=@test1 -DdriverType=chrome**
+* After that is successful, to execute the demo test run **mvn test -Dcucumber.options="--tags @test1" -DdriverType=chrome**
 * When the test finishes you can check the reports found in the following folder: **/target/cucumber-html-reports/**
 * Then open up the following file in a browser (Chrome if possible): **overview-features.html**
 
