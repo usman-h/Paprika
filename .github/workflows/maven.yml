@@ -23,6 +23,6 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: Code Scan
-      run: mvn sonar:sonar
+      run: mvn sonar:sonar -Dsonar.host.url=http://localhost:9000
     - name: Run Tests
       run: mvn clean install -DskipTests
