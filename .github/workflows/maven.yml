@@ -22,7 +22,13 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - name: Code Scan
-      run: mvn sonar:sonar -Dsonar.host.url=http://localhost:9000
+    - name: Clean Install SonarQube Code Scan
+      run: mvn clean install sonar:sonar
+    - name: Install SonarQube
+      run: mvn install sonar:sonar
+    - name: Execute Sonar Qube
+      run: mvn sonar:sonar
+    - name: Run with PortNumber 
+      run: mvn clean sonar:sonar -Dsonar.host.url=http://localhost:9000
     - name: Run Tests
       run: mvn clean install -DskipTests
