@@ -22,3 +22,7 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - name: Code Scan
+      run: mvn sonar:sonar
+    - name: Run Tests
+      run: mvn clean install -DskipTests
