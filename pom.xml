@@ -23,8 +23,8 @@
     </developers>
 
     <properties>
-        <sonar.host.url>http://localhost:9000</sonar.host.url>
-        <sonar.scm.provider>git</sonar.scm.provider>
+        <!--<sonar.host.url>http://localhost:9000</sonar.host.url>
+        <sonar.scm.provider>git</sonar.scm.provider>-->
         <sonar.language>java</sonar.language>
         <custom.folder>config</custom.folder>
         <surefire.fork.count>2</surefire.fork.count>
@@ -276,11 +276,11 @@
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
-            <plugin>
+            <!--<plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>3.2</version>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 
