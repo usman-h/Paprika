@@ -5,5 +5,3 @@ Scenario: scenario two point one
   When two
   Then three
   And four
-
-Scenario Outline: Testing 123  
