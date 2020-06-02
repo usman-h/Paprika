@@ -23,6 +23,8 @@
     </developers>
 
     <properties>
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
+        <sonar.scm.provider>git</sonar.scm.provider>
         <sonar.language>java</sonar.language>
         <custom.folder>config</custom.folder>
         <surefire.fork.count>2</surefire.fork.count>
