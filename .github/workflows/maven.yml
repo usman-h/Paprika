@@ -26,3 +26,6 @@ jobs:
     #  run: mvn clean sonar:sonar
     - name: Run Tests
       run: mvn clean install -DskipTests
+      
+    - name: To Infinity... And Beyond!
+      run: echo You can run whatever you need to without any issues...!
