@@ -19,4 +19,7 @@ Scenario: Launch a slow application 2
   And I wait
   Then I should see registration text field
   
-Scenario:
+Scenario Outline: something
+  Given this
+  When that
+  Then results
