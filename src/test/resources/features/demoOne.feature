@@ -18,8 +18,3 @@ Scenario: Launch a slow application 2
   When I click next
   And I wait
   Then I should see registration text field
-  
-Scenario Outline: something
-  Given this
-  When that
-  Then results
