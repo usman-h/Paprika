@@ -18,3 +18,9 @@ Scenario: Launch a slow application 2
   When I click next
   And I wait
   Then I should see registration text field
+
+Scenario: dddddd
+  Given I launch evo application
+  When I click next
+  And I wait
+  Then I should see registration text field
