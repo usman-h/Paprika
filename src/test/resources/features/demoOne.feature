@@ -1,7 +1,7 @@
 Feature: feature one
 
 @test
-Scenario: scenario one point one
+Scenario Ouline: scenario one point one
   Given one
   Then three
   
